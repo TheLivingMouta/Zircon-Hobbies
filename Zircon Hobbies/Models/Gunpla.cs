@@ -1,0 +1,17 @@
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+
+namespace Zircon_Hobbies.Models
+{
+    public class Gunpla
+    {
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Type { get; set; }
+    public string scale { get; set; }
+    public int ProductionCompanyId { get; set; }
+    public double Price { get; set; }
+
+
+    }
+}
