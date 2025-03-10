@@ -6,6 +6,8 @@
 
 <h1>Details</h1>
 
+<input type="hidden" value="@Model.Id"/>
+
 <div>
     <h4>Gunpla</h4>
     <hr />
@@ -23,10 +25,10 @@
             @Html.DisplayFor(model => model.Type)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.scale)
+            @Html.DisplayNameFor(model => model.Scale)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.scale)
+            @Html.DisplayFor(model => model.Scale)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProductionCompanyId)
@@ -40,9 +42,14 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
+
+        <dd class="list-group-item"><a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id" cite="btn btn-primary">Add to Cart</a></dd>
+
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    @if(User.IsInRole("Admin")){
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

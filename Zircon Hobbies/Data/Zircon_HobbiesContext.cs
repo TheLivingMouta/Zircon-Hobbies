@@ -16,5 +16,7 @@ namespace Zircon_Hobbies.Data
 
         public DbSet<Zircon_Hobbies.Models.Gunpla> Gunpla { get; set; } = default!;
         public DbSet<Zircon_Hobbies.Models.Production_Company> Production_Company { get; set; } = default!;
+        public DbSet<cartItem> ShoppingCartItems { get; set; } = default!;
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; } = default!;
     }
 }

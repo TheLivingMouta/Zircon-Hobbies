@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Zircon_Hobbies.Models.Gunpla>
-
+﻿@model Zircon_Hobbies.Models.GunplaViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,31 +6,52 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
 </p>
+
+<form asp-controller="Gunplas" asp-action="Index" method="get">
+
+    <p>
+        <select asp-for="GunplaType" asp-items="Model.Types">
+            <option value="">All</option>
+        </select>
+
+        <select asp-for="GunplaScale" asp-items="Model.Scale">
+            <option value="">All</option>
+        </select>
+
+        <label>Title: <input type="text" asp-for="SearchString"></label>
+        <input type="submit" value="Filter"/>
+
+    </p>    
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Gunplas![0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.Gunplas![0].Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.scale)
+                @Html.DisplayNameFor(model => model.Gunplas![0].Scale)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductionCompanyId)
+                @Html.DisplayNameFor(model => model.Gunplas![0].ProductionCompanyId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                @Html.DisplayNameFor(model => model.Gunplas![0].Price)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Gunplas) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -40,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.scale)
+                @Html.DisplayFor(modelItem => item.Scale)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductionCompanyId)
@@ -49,9 +69,16 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    }
+                    |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
             </td>
         </tr>
 }
