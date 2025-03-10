@@ -47,17 +47,6 @@ namespace Zircon_Hobbies.Models
                         ProductionCompanyId = 1,
                         Price = 44.65,
 
-                    }
-
-                    new Gunpla
-                    {
-
-                        Name = "RX-124 Gundam TR-6 (Woundwort)",
-                        Type = "HGUC",
-                        Scale = "1/144",
-                        ProductionCompanyId = 1,
-                        Price = 34.00,
-
                     },
 
                     new Gunpla

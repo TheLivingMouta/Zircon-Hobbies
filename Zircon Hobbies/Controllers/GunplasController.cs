@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 using Zircon_Hobbies.Data;
 using Zircon_Hobbies.Models;
 
@@ -20,9 +21,51 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Gunplas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string GunplaType, string GunplaScale ,string searchString)
         {
-            return View(await _context.Gunpla.ToListAsync());
+
+            if (_context.Gunpla == null)
+            {
+                return Problem("Enttiy set 'Zircon_HobbiesContext.Gunpla' is null");
+            }
+
+            IQueryable<string> TypeQuery = from g in _context.Gunpla
+                                            orderby g.Type
+                                            select g.Type;
+            
+            IQueryable<string> ScaleQuery = from s in _context.Gunpla
+                                            orderby s.Scale
+                                            select s.Scale;
+            
+            var gunplas = from g in _context.Gunpla
+                          select g;
+
+
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                gunplas = gunplas.Where(z => z.Name!.ToUpper().Contains(searchString.ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(GunplaScale))
+            {
+                gunplas = gunplas.Where(c => c.Scale == GunplaScale);
+            }
+
+            if (!string.IsNullOrEmpty(GunplaType))
+            {
+                gunplas = gunplas.Where(x => x.Type == GunplaType);
+            }
+
+            var GunplaVM = new GunplaViewModel
+            {
+                Types = new SelectList(await TypeQuery.Distinct().ToListAsync()),
+                Scale =  new SelectList(await ScaleQuery.Distinct().ToListAsync()),
+                Gunplas = await gunplas.ToListAsync()
+            };
+
+            return View(GunplaVM);
+
         }
 
         // GET: Gunplas/Details/5
