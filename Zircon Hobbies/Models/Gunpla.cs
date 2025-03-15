@@ -10,6 +10,9 @@ namespace Zircon_Hobbies.Models
     public string Type { get; set; }
     public string Scale { get; set; }
     public int ProductionCompanyId { get; set; }
+
+    public Production_Company ProductionCompany { get; set; }
+ 
     public double Price { get; set; }
 
 

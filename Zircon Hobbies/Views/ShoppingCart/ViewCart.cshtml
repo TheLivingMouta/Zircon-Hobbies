@@ -2,3 +2,51 @@
 
 <h1>Shopping Cart</h1>
 
+<h2 class="text-success"> @(ViewBag.CartMessage)</h2>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Scale</th>
+			<th>Brand</th>
+			<th>Quantity</th>
+			<th>Price</th>
+			<th>subtotal</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.cartItems)
+		{
+			<tr>
+				<td>@item.Gunpla.Name</td>
+				<td>@item.Gunpla.Type</td>
+				<td>@item.Gunpla.Scale</td>
+				<td>@item.Gunpla.ProductionCompany.Name</td>
+				<td>@item.Quantity</td>
+				<td>@item.Gunpla.Price</td>
+				<td>@(item.Gunpla.Price * item.Quantity)</td>
+				<input type="hidden" value="@item.Gunpla.Id" />
+				<td>
+					<a asp-controller="ShoppingCart" asp-action="RemoveItem" asp-route-id="@item.Gunpla.Id" class="btn btn-danger"> remove </a>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Total:</td>
+			<td>@Model.TotalPrice</td>
+		</tr>
+	</tbody>
+</table>
+
+	<a class="btn btn-success" asp-controller="ShoppingCart" asp-action="Checkout">Purchase</a>
+
+
+
+

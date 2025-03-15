@@ -17,6 +17,9 @@ namespace Zircon_Hobbies.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+
+            ViewBag.CartMessage = TempData["CartMessage"];
+
             return View();
         }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zircon_Hobbies.Data;
 
@@ -11,9 +12,11 @@ using Zircon_Hobbies.Data;
 namespace Zircon_Hobbies.Migrations
 {
     [DbContext(typeof(Zircon_HobbiesContext))]
-    partial class Zircon_HobbiesContextModelSnapshot : ModelSnapshot
+    [Migration("20250312124929_PurchaseDatabase")]
+    partial class PurchaseDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +43,9 @@ namespace Zircon_Hobbies.Migrations
                     b.Property<int>("ProductionCompanyId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Production_CompanyId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Scale")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -50,7 +56,7 @@ namespace Zircon_Hobbies.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductionCompanyId");
+                    b.HasIndex("Production_CompanyId");
 
                     b.ToTable("Gunpla");
                 });
@@ -103,6 +109,26 @@ namespace Zircon_Hobbies.Migrations
                     b.ToTable("Purchases");
                 });
 
+            modelBuilder.Entity("Zircon_Hobbies.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShoppingCart");
+                });
+
             modelBuilder.Entity("Zircon_Hobbies.Models.cartItem", b =>
                 {
                     b.Property<int>("Id")
@@ -117,22 +143,23 @@ namespace Zircon_Hobbies.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ShoppingCartId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("GunplaId");
+
+                    b.HasIndex("ShoppingCartId");
 
                     b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("Zircon_Hobbies.Models.Gunpla", b =>
                 {
-                    b.HasOne("Zircon_Hobbies.Models.Production_Company", "ProductionCompany")
+                    b.HasOne("Zircon_Hobbies.Models.Production_Company", null)
                         .WithMany("Gunplas")
-                        .HasForeignKey("ProductionCompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductionCompany");
+                        .HasForeignKey("Production_CompanyId");
                 });
 
             modelBuilder.Entity("Zircon_Hobbies.Models.Purchase", b =>
@@ -154,12 +181,21 @@ namespace Zircon_Hobbies.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Zircon_Hobbies.Models.ShoppingCart", null)
+                        .WithMany("cartItems")
+                        .HasForeignKey("ShoppingCartId");
+
                     b.Navigation("Gunpla");
                 });
 
             modelBuilder.Entity("Zircon_Hobbies.Models.Production_Company", b =>
                 {
                     b.Navigation("Gunplas");
+                });
+
+            modelBuilder.Entity("Zircon_Hobbies.Models.ShoppingCart", b =>
+                {
+                    b.Navigation("cartItems");
                 });
 #pragma warning restore 612, 618
         }

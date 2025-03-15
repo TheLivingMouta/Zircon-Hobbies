@@ -91,6 +91,13 @@ hr {
   opacity: 0.25;
 }
 
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 hr:not([size]) {
   height: 1px;
 }

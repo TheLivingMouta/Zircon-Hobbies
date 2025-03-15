@@ -5,19 +5,13 @@
 }
 
 <h1>Details</h1>
-
+<br />
 <input type="hidden" value="@Model.Id"/>
 
 <div>
-    <h4>Gunpla</h4>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Type)
         </dt>
@@ -31,10 +25,10 @@
             @Html.DisplayFor(model => model.Scale)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductionCompanyId)
+            @Html.DisplayNameFor(model => model.ProductionCompany.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProductionCompanyId)
+            @Html.DisplayFor(model => model.ProductionCompany.Name)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
@@ -43,7 +37,7 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
 
-        <dd class="list-group-item"><a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id" cite="btn btn-primary">Add to Cart</a></dd>
+        <dt class="list-group-item"><a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@Model.Id" cite="btn btn-primary">Add to Cart</a></dt>
 
     </dl>
 </div>
@@ -51,5 +45,6 @@
     @if(User.IsInRole("Admin")){
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
     }
+    <br />
     <a asp-action="Index">Back to List</a>
 </div>

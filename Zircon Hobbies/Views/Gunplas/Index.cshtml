@@ -3,7 +3,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Gundam Models</h1>
 
 <p>
     @if (User.IsInRole("Admin"))
@@ -39,10 +39,10 @@
                 @Html.DisplayNameFor(model => model.Gunplas![0].Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gunplas![0].Scale)
+                @Html.DisplayNameFor(model => model.Scale)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gunplas![0].ProductionCompanyId)
+                @Html.DisplayNameFor(model => model.Gunplas![0].ProductionCompany.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gunplas![0].Price)
@@ -63,7 +63,7 @@
                 @Html.DisplayFor(modelItem => item.Scale)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProductionCompanyId)
+                    @Html.DisplayFor(modelItem => item.ProductionCompany.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

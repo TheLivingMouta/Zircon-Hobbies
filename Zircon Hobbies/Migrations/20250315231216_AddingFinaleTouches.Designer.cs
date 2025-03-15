@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zircon_Hobbies.Data;
 
@@ -11,9 +12,11 @@ using Zircon_Hobbies.Data;
 namespace Zircon_Hobbies.Migrations
 {
     [DbContext(typeof(Zircon_HobbiesContext))]
-    partial class Zircon_HobbiesContextModelSnapshot : ModelSnapshot
+    [Migration("20250315231216_AddingFinaleTouches")]
+    partial class AddingFinaleTouches
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

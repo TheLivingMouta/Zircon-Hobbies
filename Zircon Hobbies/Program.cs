@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Zircon_HobbiesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Zircon_HobbiesContext") ?? throw new InvalidOperationException("Connection string 'Zircon_HobbiesContext' not found.")));
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -28,6 +31,8 @@ builder.Services.AddAuthorization(options =>
 });
 
 var app = builder.Build();
+
+app.UseSession();
 
 using (var scope = app.Services.CreateScope())
 {

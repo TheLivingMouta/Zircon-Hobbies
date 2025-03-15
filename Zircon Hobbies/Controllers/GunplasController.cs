@@ -21,7 +21,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Gunplas
-        public async Task<IActionResult> Index(string GunplaType, string GunplaScale ,string searchString)
+        public async Task<IActionResult> Index(string GunplaType, string GunplaScale, string searchString)
         {
 
             if (_context.Gunpla == null)
@@ -30,15 +30,16 @@ namespace Zircon_Hobbies.Controllers
             }
 
             IQueryable<string> TypeQuery = from g in _context.Gunpla
-                                            orderby g.Type
-                                            select g.Type;
-            
+                                           orderby g.Type
+                                           select g.Type;
+
             IQueryable<string> ScaleQuery = from s in _context.Gunpla
                                             orderby s.Scale
                                             select s.Scale;
-            
-            var gunplas = from g in _context.Gunpla
-                          select g;
+
+            var gunplas = _context.Gunpla
+         .Include(g => g.ProductionCompany)
+         .AsQueryable();
 
 
 
@@ -60,7 +61,7 @@ namespace Zircon_Hobbies.Controllers
             var GunplaVM = new GunplaViewModel
             {
                 Types = new SelectList(await TypeQuery.Distinct().ToListAsync()),
-                Scale =  new SelectList(await ScaleQuery.Distinct().ToListAsync()),
+                Scale = new SelectList(await ScaleQuery.Distinct().ToListAsync()),
                 Gunplas = await gunplas.ToListAsync()
             };
 
@@ -77,6 +78,7 @@ namespace Zircon_Hobbies.Controllers
             }
 
             var gunpla = await _context.Gunpla
+                .Include(g => g.ProductionCompany)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (gunpla == null)
             {
