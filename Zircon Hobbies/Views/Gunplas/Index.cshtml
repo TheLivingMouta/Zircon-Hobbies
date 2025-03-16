@@ -5,13 +5,6 @@
 
 <h1>Gundam Models</h1>
 
-<p>
-    @if (User.IsInRole("Admin"))
-    {
-        <a asp-action="Create">Create New</a>
-    }
-</p>
-
 <form asp-controller="Gunplas" asp-action="Index" method="get">
 
     <p>
@@ -23,7 +16,7 @@
             <option value="">All</option>
         </select>
 
-        <label>Title: <input type="text" asp-for="SearchString"></label>
+        <label>Name: <input type="text" onfocus="this.value=''" asp-for="SearchString"></label>
         <input type="submit" value="Filter"/>
 
     </p>    
@@ -42,7 +35,7 @@
                 @Html.DisplayNameFor(model => model.Scale)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gunplas![0].ProductionCompany.Name)
+               Brand
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Gunplas![0].Price)
@@ -84,3 +77,10 @@
 }
     </tbody>
 </table>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create">Create New</a>
+    }
+</p>

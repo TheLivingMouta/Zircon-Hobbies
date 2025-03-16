@@ -99,8 +99,11 @@ namespace Zircon_Hobbies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Type,scale,ProductionCompanyId,Price")] Gunpla gunpla)
+        public async Task<IActionResult> Create([Bind("Id,Name,Type,Scale,ProductionCompanyId,Price")] Gunpla gunpla)
         {
+
+            ModelState.Remove("ProductionCompany");
+
             if (ModelState.IsValid)
             {
                 _context.Add(gunpla);
@@ -131,12 +134,14 @@ namespace Zircon_Hobbies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,scale,ProductionCompanyId,Price")] Gunpla gunpla)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Type,Scale,ProductionCompanyId,Price")] Gunpla gunpla)
         {
             if (id != gunpla.Id)
             {
                 return NotFound();
             }
+
+            ModelState.Remove("ProductionCompany");
 
             if (ModelState.IsValid)
             {

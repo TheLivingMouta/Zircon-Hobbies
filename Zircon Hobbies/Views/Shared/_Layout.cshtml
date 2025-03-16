@@ -22,7 +22,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Gunplas" asp-action="Index">Gundam Models</a>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                        <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Production_Company" asp-action="Index">Production Companies</a>
+                        </li>
+                        }   
                     </ul>
+
+
+                   
 
                     <div class="d-flex">
                         <ul class="navbar-nav">
