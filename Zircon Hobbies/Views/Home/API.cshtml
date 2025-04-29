@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "API";
+}
+<head>
+    <h1>@ViewData["Title"]</h1>
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+</head>
+
+<h1>Gunpla API Documentation</h1>
+
+<p>This API lets you access and manage Gunpla products. Use the endpoints below to fetch or modify Gunpla data.</p>
+
+<h2>Base URL</h2>
+<p><code>https://localhost:7269/api/Gunpla</code></p>
+
+<h2>Available Endpoints</h2>
+<ul>
+    <li><code>GET /api/Gunpla</code> - Get all Gunpla items</li>
+    <li><code>GET /api/Gunpla/{id}</code> - Get a single Gunpla item</li>
+    <li><code>POST /api/Gunpla</code> - Add a new Gunpla </li>
+    <li><code>PUT /api/Gunpla/{id}</code> - Update a Gunpla item</li>
+    <li><code>DELETE /api/Gunpla/{id}</code> - Delete a Gunpla item</li>
+</ul>
+

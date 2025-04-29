@@ -13,5 +13,7 @@ namespace Zircon_Hobbies.Models
         public string? GunplaScale { get; set; }
         public string? SearchString { get; set; }
 
+        public IEnumerable<SelectListItem> ProductionCompany { get; set; }
+
     }
 }

@@ -91,6 +91,14 @@ namespace Zircon_Hobbies.Controllers
         // GET: Gunplas/Create
         public IActionResult Create()
         {
+
+            ViewBag.ProductionCompany = _context.Production_Company
+            .Select(pc => new SelectListItem
+            {
+                Value = pc.Id.ToString(),
+                Text = pc.Name
+            }).ToList();
+
             return View();
         }
 
@@ -110,6 +118,7 @@ namespace Zircon_Hobbies.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(gunpla);
         }
 
@@ -126,6 +135,14 @@ namespace Zircon_Hobbies.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.ProductionCompany = _context.Production_Company
+        .Select(pc => new SelectListItem
+        {
+            Value = pc.Id.ToString(),
+            Text = pc.Name
+        }).ToList();
+
             return View(gunpla);
         }
 
@@ -163,6 +180,14 @@ namespace Zircon_Hobbies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.ProductionCompany = _context.Production_Company
+        .Select(pc => new SelectListItem
+        {
+            Value = pc.Id.ToString(),
+            Text = pc.Name
+        }).ToList();
+
             return View(gunpla);
         }
 
