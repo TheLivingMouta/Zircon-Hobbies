@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Location";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Warehouse Location</title>
+    <style>
+        #map {
+            height: 700px;
+            width: 100%;
+            border: 2px solid orange;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Our Warehouse Location</h3>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            const myLatLng = { lat: 53.9838163, lng: -6.3935121 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: myLatLng,
+            });
+
+            new google.maps.Marker({
+                position: myLatLng,
+                map,
+            });
+        }
+    </script>
+
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDdOFVuoJV6GBSpap2wE0EfhNc8hP1sW4&callback=initMap">
+    </script>
+</body>
+</html>

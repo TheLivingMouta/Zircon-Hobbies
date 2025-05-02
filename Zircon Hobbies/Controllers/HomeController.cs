@@ -34,6 +34,12 @@ namespace Zircon_Hobbies.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public IActionResult Location()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
