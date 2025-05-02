@@ -50,7 +50,60 @@ namespace Zircon_Hobbies.Controllers
 			return gunpla;
 		}
 
-		[HttpPost]
+        [HttpGet("ByName/{name}")]
+        public async Task<ActionResult<IEnumerable<Gunpla>>> GetByName(string name)
+        {
+            var result = await _context.Gunpla
+                .Include(g => g.ProductionCompany)
+                .Where(g => g.Name.Contains(name))
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet("ByType/{type}")]
+        public async Task<ActionResult<IEnumerable<Gunpla>>> GetByType(string type)
+        {
+
+            // Tried using typemap to catch people using the full name of the grade
+            // "Real Grade" instead of just "RG" but couldn't get it to work
+
+            //var typemap = new Dictionary<string, string>()
+            //{
+            //    {"SD","Super Deformed" },
+            //    {"HG","High Grade"},
+            //    {"HGUC","High Grade Universal Century"},
+            //    {"RG","Real Grade"},
+            //    {"MG","Master Grade"},
+            //    {"PG","Perfect Grade"},
+
+            //};
+
+            //if (!typemap.TryGetValue(type, out var fulltype))
+            //{
+            //    return BadRequest($"Unknown Type: {type}.");
+            //}
+
+            var result = await _context.Gunpla
+                .Include(g => g.ProductionCompany)
+                .Where(g => g.Type.Equals(type))
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet("ByScale")]
+        public async Task<ActionResult<IEnumerable<Gunpla>>> GetByScale([FromQuery] string scale)
+        {
+            var result = await _context.Gunpla
+                .Include(g => g.ProductionCompany)
+                .Where(g => g.Scale.Equals(scale))
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpPost]
         public async Task<ActionResult<Gunpla>> PostGunpla(GunplaPostDto dto)
         {
             var gunpla = new Gunpla
