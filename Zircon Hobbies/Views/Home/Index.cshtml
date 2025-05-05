@@ -2,6 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
+<style>
+
+    .Orange-Border {
+        border: 4px solid #E95420;
+    }
+</style>
 
 <div class="text-center">
 
@@ -10,3 +16,19 @@
     <h2 class="text-success"> @(ViewBag.CartMessage)</h2>
 </div>
 
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <img src="/images//Nu Gundam (Clear).jpg" class="img-fluid rounded shadow Orange-Border" alt="Gunpla Model 1">
+            <h5 class="mt-2">RX-93 ν Gundam (Clear)</h5>
+        </div>
+        <div class="col-md-4">
+            <img src="/images/Woundwort.jpg" class="img-fluid rounded shadow Orange-Border" alt="Gunpla Model 2">
+            <h5 class="mt-2">RX-124 Gundam TR-6</h5>
+        </div>
+        <div class="col-md-4">
+            <img src="/images/Barbatos.jpg" class="img-fluid rounded shadow Orange-Border" alt="Gunpla Model 3">
+            <h5 class="mt-2">ASW-G-08 Gundam</h5>
+        </div>
+    </div>
+</div>
