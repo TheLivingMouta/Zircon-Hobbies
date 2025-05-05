@@ -1,7 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Gunpla API";
+    ViewData["Title"] = "API";
 }
 <head>
+    <h1>@ViewData["Title"]</h1>
     <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
 </head>
 
@@ -16,9 +17,6 @@
 <ul>
     <li><code>GET /api/Gunpla</code> - Get all Gunpla items</li>
     <li><code>GET /api/Gunpla/{id}</code> - Get a single Gunpla item</li>
-    <li><code>GET /api/Gunpla/ByName/{name}</code> - Get a single Gunpla Item from it's name
-    <li><code>GET /api/Gunpla/ByType/{type}</code> - Get a single Gunpla Item from it's type/Grade (RG/MG/PG)
-    <li><code>GET /api/Gunpla/ByScale?scale={scale}</code> - Get a single Gunpla Item from it's scale(1/144 / 1/100)
     <li><code>POST /api/Gunpla</code> - Add a new Gunpla </li>
     <li><code>PUT /api/Gunpla/{id}</code> - Update a Gunpla item</li>
     <li><code>DELETE /api/Gunpla/{id}</code> - Delete a Gunpla item</li>
