@@ -5,16 +5,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Zircon_Hobbies.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Authentication.Google;
 
-
-//var config = new ConfigurationBuilder()
-//    .AddJsonFile($"appsettings.json", true, true)
-//    .AddJsonFile($"appsettings.{environment}.json", true, true)
-//    .AddEnvironmentVariables()
-//    .AddUserSecrets(Program)()
-//    .Build();
 
 var builder = WebApplication.CreateBuilder(args);
+
+var configuration = builder.Configuration;
+
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = configuration["ZirconHobbiesClientId"];
+    googleOptions.ClientSecret = configuration["ZirconHobbiesClientSecret"];
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Views/Account/Login";
+});
+
 builder.Services.AddDbContext<Zircon_HobbiesContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Zircon_HobbiesContext") ?? throw new InvalidOperationException("Connection string 'Zircon_HobbiesContext' not found.")));
 
@@ -38,13 +46,6 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-//builder.Services.AddAuthorization().AddGoogle(options =>
-//{
-//    IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentiction:Google");
-//    options.ClientId = googleAuthNSection["ClientId"];
-//    options.ClientSecret = googleAuthNSection["ClientSecret"];
-//});
 
 
 var app = builder.Build();

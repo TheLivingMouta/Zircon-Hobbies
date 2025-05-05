@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-Zircon_Hobbies-f751deeb-16ae-44f5-80d7-c0f0fbbb8c3f</UserSecretsId>
+    <UserSecretsId> 282227016341-tsc2nq2g196d32ck3g8lja76c8q6l0ls.apps.googleusercontent.com </UserSecretsId>
     <RootNamespace>Zircon_Hobbies</RootNamespace>
   </PropertyGroup>
 
@@ -22,6 +22,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 

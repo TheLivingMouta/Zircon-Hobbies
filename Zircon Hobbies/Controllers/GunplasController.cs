@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 using Zircon_Hobbies.Data;
 using Zircon_Hobbies.Models;
+using PagedList;
 
 namespace Zircon_Hobbies.Controllers
 {
@@ -72,6 +73,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Gunplas/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -91,6 +93,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Gunplas/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
 
@@ -124,7 +127,7 @@ namespace Zircon_Hobbies.Controllers
             return View(gunpla);
         }
 
-        // GET: Gunplas/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -194,6 +197,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Gunplas/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

@@ -3,6 +3,7 @@ using Zircon_Hobbies.Data;
 using Zircon_Hobbies.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Zircon_Hobbies.Controllers
 {
@@ -53,6 +54,7 @@ namespace Zircon_Hobbies.Controllers
 
         }
 
+        [Authorize]
         public IActionResult ViewCart()
         {
 

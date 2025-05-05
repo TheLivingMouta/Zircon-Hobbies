@@ -45,6 +45,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Production_Company/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -67,6 +68,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Production_Company/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -118,6 +120,7 @@ namespace Zircon_Hobbies.Controllers
         }
 
         // GET: Production_Company/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
